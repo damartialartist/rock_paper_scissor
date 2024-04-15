@@ -53,11 +53,14 @@ function playRound(playerSelection, computerChoice) {
     return "Game done"
 }
 
+let playAgain;
+
+do {
 let otherChoice = getComputerChoice();
 let playerSelection = prompt("Enter Rock/Paper/Scissor");
 let outcome = playRound(playerSelection, otherChoice);
-
 otherChoice = decodeChoice(otherChoice);
-
 console.log(`Computer chose: ${otherChoice}, ${outcome}`)
+playAgain = prompt("Play Again? Yes/No");
+} while(playAgain.toLowerCase() === "yes" );
 
