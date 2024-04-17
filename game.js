@@ -13,6 +13,7 @@ function decodeChoice(choice) {
 }
 
 function playRound(playerSelection, computerChoice) {
+
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === "rock") {
         playerSelection = 1;
@@ -26,41 +27,31 @@ function playRound(playerSelection, computerChoice) {
         return "Tie Game" ;
     }
 
-    if ((playerSelection == 1) && (computerChoice == 2)) {
+    if (((playerSelection == 1) && (computerChoice == 2)) ||
+        ((playerSelection == 3) && (computerChoice == 1)) ||
+        ((playerSelection == 2) && (computerChoice == 3))) {
         return "You Lost";
     }
 
-    if((playerSelection == 1) && (computerChoice == 3)) {
+    if (((playerSelection == 1) && (computerChoice == 3)) ||
+        ((playerSelection == 2) && (computerChoice == 1)) ||
+        ((playerSelection == 3) && (computerChoice == 2))) {
         return "You Win";
     }
-
-    if((playerSelection == 2) && (computerChoice == 1)) {
-        return "You Win";
-    }
-
-    if((playerSelection == 2) && (computerChoice == 3)) {
-        return "You Lost" ;
-    }
-
-    if((playerSelection == 3) && (computerChoice == 1)) {
-        return "You Lost";
-    }
-
-    if((playerSelection == 3) && (computerChoice == 2)) {
-        return "You Win";
-    }
-
-    return "Game done"
 }
 
-let playAgain;
+//let otherChoice = getComputerChoice();
+//let playerSelection = prompt("Enter Rock/Paper/Scissor");
+//let outcome = playRound(playerSelection, otherChoice);
+//playAgain = prompt("Play Again? Yes/No");
 
-do {
-let otherChoice = getComputerChoice();
-let playerSelection = prompt("Enter Rock/Paper/Scissor");
-let outcome = playRound(playerSelection, otherChoice);
-otherChoice = decodeChoice(otherChoice);
-console.log(`Computer chose: ${otherChoice}, ${outcome}`)
-playAgain = prompt("Play Again? Yes/No");
-} while(playAgain.toLowerCase() === "yes" );
+const choiceList = document.querySelector("ul");
 
+let outcome = choiceList.addEventListener("click", (event) => {
+    let choice = event.target;
+    //console.log(choice.id);
+    let computerChoice = getComputerChoice();
+    let outcome = playRound(choice.id, computerChoice);
+    computerChoice = decodeChoice(computerChoice);
+    console.log(`You chose: ${choice.id}, computer chose: ${computerChoice}, ${outcome}`)
+});
