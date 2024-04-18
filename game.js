@@ -55,12 +55,14 @@ function playRound(playerSelection, computerChoice) {
 
 const choiceList = document.querySelector("ul");
 const display = document.querySelector("h1");
-let playerChoice;
+let playerWinCount;
+let cpuWinCount;
+
 choiceList.addEventListener("click", (event) => {
     let choice = event.target;
     let computerChoice = getComputerChoice();
     let outcome = playRound(choice.id, computerChoice);
     computerChoice = decodeChoice(computerChoice);
     console.log(`You chose: ${choice.id}, computer chose: ${computerChoice}, ${outcome}`)
-    display.textContent = `You chose: ${choice.id}, computer chose: ${computerChoice}, ${outcome}`
+
 });
