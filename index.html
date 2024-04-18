@@ -4,15 +4,29 @@
   <meta charset="UTF-8">
   <title>Page Title</title>
   <script src="game.js" defer></script>
-  <link rel="stylesheet" src="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <ul>
+  <div class = "display" height="100px">
+  <h1>
+  </h1>
+  </div>
+  <ul class="choices">
     <li><button id="Rock"> Rock </button></li>
     <li><button id="Paper"> Paper </button></li>
     <li><button id="Scissor"> Scissor </button></li>
   </ul>
-  <h1>
-  </h1>
+
+  <div class="score-count">
+    <div class="your-score">
+      <h2 class="your-score"> Your Score: </h2>
+      <p class="your-score"></p>
+    </div>
+
+    <div class="cpu-score">
+    <h2 class="cpu-score"> CPU Score: </h2>
+    <p class="cpu-score"></p>
+    </div>
+  </div>
 </body>
 </html>
