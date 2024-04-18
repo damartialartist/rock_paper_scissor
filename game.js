@@ -13,6 +13,7 @@ function decodeChoice(choice) {
 }
 
 function playRound(playerSelection, computerChoice) {
+
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === "rock") {
         playerSelection = 1;
@@ -37,7 +38,7 @@ function playRound(playerSelection, computerChoice) {
         ((playerSelection == 3) && (computerChoice == 2))) {
         return "You Win";
     }
-    return "Game done"
+
 }
 
 function Score()  {
