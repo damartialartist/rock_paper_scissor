@@ -37,8 +37,6 @@ function playRound(playerSelection, computerChoice) {
         ((playerSelection == 3) && (computerChoice == 2))) {
         return "You Win";
     }
-
-
     return "Game done"
 }
 
@@ -49,22 +47,36 @@ function Score()  {
     };
 }
 
+function updateScoreBoard(outcome) {
+    if (outcome == "You Win") {
+        player.updateScore();
+    } else if (outcome == "You Lost") {
+        cpu.updateScore();
+    } 
+
+    playerScore.textContent = `${player.score}`
+    cpuScore.textContent=`${cpu.score}`
+}
+
 const player = new Score;
 const cpu = new Score;
-
-const choiceList = document.querySelector("ul");
+const choiceList = document.querySelector("ul.choices");
 const display = document.querySelector("h1");
 const scoreCount = document.querySelector(".score-count");
 const playerScore = scoreCount.querySelector(".score-count p.your-score");
 const cpuScore = scoreCount.querySelector(".score-count p.cpu-score")
-playerScore.textContent = "${}";
-cpuScore.textContent = "0";
+playerScore.textContent = `${player.score}`;
+cpuScore.textContent = `${cpu.score}`;
 
 choiceList.addEventListener("click", (event) => {
-    let choice = event.target.id;
-    let computerChoice = getComputerChoice();
-    let outcome = playRound(choice, computerChoice);
-    
-
-    computerChoice = decodeChoice(computerChoice);
+    if (event.target.tagName == "BUTTON") {
+        console.log('clicked');
+        let choice = event.target.id;
+        let computerChoice = getComputerChoice();
+        let outcome = playRound(choice, computerChoice);
+        console.log(outcome);
+        computerChoice = decodeChoice(computerChoice);
+        updateScoreBoard(outcome);
+        display.textContent = `You picked ${choice}, CPU picked ${computerChoice}, ${outcome}.`
+    }
 });
