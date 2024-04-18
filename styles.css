@@ -27,6 +27,7 @@ button {
 .display h1 {
     color: white;
 }
+
 div.score-count  {
     display: flex;
     justify-content: space-between;
