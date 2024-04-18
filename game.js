@@ -53,14 +53,14 @@ function playRound(playerSelection, computerChoice) {
     return "Game done"
 }
 
-let playAgain;
-
-do {
-let otherChoice = getComputerChoice();
-let playerSelection = prompt("Enter Rock/Paper/Scissor");
-let outcome = playRound(playerSelection, otherChoice);
-otherChoice = decodeChoice(otherChoice);
-console.log(`Computer chose: ${otherChoice}, ${outcome}`)
-playAgain = prompt("Play Again? Yes/No");
-} while(playAgain.toLowerCase() === "yes" );
-
+const choiceList = document.querySelector("ul");
+const display = document.querySelector("h1");
+let playerChoice;
+choiceList.addEventListener("click", (event) => {
+    let choice = event.target;
+    let computerChoice = getComputerChoice();
+    let outcome = playRound(choice.id, computerChoice);
+    computerChoice = decodeChoice(computerChoice);
+    console.log(`You chose: ${choice.id}, computer chose: ${computerChoice}, ${outcome}`)
+    display.textContent = `You chose: ${choice.id}, computer chose: ${computerChoice}, ${outcome}`
+});
