@@ -28,8 +28,8 @@ function playRound(playerSelection, computerChoice) {
     }
 
     if (((playerSelection == 1) && (computerChoice == 2)) ||
-        ((playerSelection == 3) && (computerChoice == 1)) ||
-        ((playerSelection == 2) && (computerChoice == 3))) {
+        (playerSelection == 2) && (computerChoice == 3) ||
+        ((playerSelection == 3) && (computerChoice == 1)) ) {
         return "You Lost";
     }
 
@@ -38,20 +38,46 @@ function playRound(playerSelection, computerChoice) {
         ((playerSelection == 3) && (computerChoice == 2))) {
         return "You Win";
     }
+
 }
 
-//let otherChoice = getComputerChoice();
-//let playerSelection = prompt("Enter Rock/Paper/Scissor");
-//let outcome = playRound(playerSelection, otherChoice);
-//playAgain = prompt("Play Again? Yes/No");
+function Score()  {
+    this.score= 0;
+    this.updateScore = function () {
+        this.score += 1;
+    };
+}
 
-const choiceList = document.querySelector("ul");
+function updateScoreBoard(outcome) {
+    if (outcome == "You Win") {
+        player.updateScore();
+    } else if (outcome == "You Lost") {
+        cpu.updateScore();
+    } 
 
-let outcome = choiceList.addEventListener("click", (event) => {
-    let choice = event.target;
-    //console.log(choice.id);
-    let computerChoice = getComputerChoice();
-    let outcome = playRound(choice.id, computerChoice);
-    computerChoice = decodeChoice(computerChoice);
-    console.log(`You chose: ${choice.id}, computer chose: ${computerChoice}, ${outcome}`)
+    playerScore.textContent = `${player.score}`
+    cpuScore.textContent=`${cpu.score}`
+}
+
+const player = new Score;
+const cpu = new Score;
+const choiceList = document.querySelector("ul.choices");
+const display = document.querySelector("h1");
+const scoreCount = document.querySelector(".score-count");
+const playerScore = scoreCount.querySelector(".score-count p.your-score");
+const cpuScore = scoreCount.querySelector(".score-count p.cpu-score")
+playerScore.textContent = `${player.score}`;
+cpuScore.textContent = `${cpu.score}`;
+
+choiceList.addEventListener("click", (event) => {
+    if (event.target.tagName == "BUTTON") {
+        console.log('clicked');
+        let choice = event.target.id;
+        let computerChoice = getComputerChoice();
+        let outcome = playRound(choice, computerChoice);
+        console.log(outcome);
+        computerChoice = decodeChoice(computerChoice);
+        updateScoreBoard(outcome);
+        display.textContent = `You picked ${choice}, CPU picked ${computerChoice}, ${outcome}.`
+    }
 });
